@@ -60,7 +60,7 @@ font:
   # Media cover-art screensaver title
   - file: "gfonts://Roboto@Light"
     id: font_cover_art_title
-    size: 88
+    size: 68 # Before 88
     bpp: 4
     glyphs: !include ../../../common/assets/text_glyphs.yaml
     extras:
@@ -70,7 +70,7 @@ font:
   # Media cover-art screensaver artist
   - file: "gfonts://Roboto@Light"
     id: font_cover_art_artist
-    size: 40
+    size: 50 # Before 40
     bpp: 4
     glyphs: !include ../../../common/assets/text_glyphs.yaml
     extras:
@@ -80,7 +80,7 @@ font:
   # Media cover-art screensaver elapsed time
   - file: "gfonts://Roboto"
     id: font_cover_art_time
-    size: 20
+    size: 30 # Before 20
     bpp: 4
     glyphs: " 0123456789:/-"
 

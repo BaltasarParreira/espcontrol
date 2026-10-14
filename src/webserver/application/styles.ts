@@ -79,9 +79,17 @@ export function createWebStyles(dragAnimation: boolean): string {
         ".sp-main.sp-grid-loading{visibility:hidden;opacity:0;pointer-events:none;transition:opacity .2s,visibility .2s}" +
         ".sp-btn{border-radius:var(--btn-r);padding:var(--btn-pad);" +
         "display:flex;flex-direction:column;justify-content:space-between;" +
-        "cursor:pointer;transition:all .2s;box-sizing:border-box;border:0;" +
+        "cursor:pointer;transition:background-color .2s,box-shadow .2s,filter .2s,opacity .2s,transform .2s,color .2s;box-sizing:border-box;border:0;" +
         "position:relative;overflow:hidden;min-width:0;color:var(--card-text-color,var(--preview-text-primary))}" +
         ".sp-btn:hover{filter:brightness(1.15)}" +
+        ".sp-resize-handle{position:absolute;right:2px;bottom:2px;width:32px;height:32px;padding:0;border:0;background:transparent;color:var(--card-text-color,#fff);cursor:nwse-resize;touch-action:none;opacity:0;z-index:5}" +
+        ".sp-resize-handle svg{width:100%;height:100%;pointer-events:none;fill:none;stroke:currentColor;stroke-width:5;stroke-linecap:round}" +
+        ".sp-btn:hover>.sp-resize-handle,.sp-resize-handle:focus-visible,.sp-btn.sp-resizing>.sp-resize-handle{opacity:1}" +
+        ".sp-btn.sp-resizing>.sp-resize-handle{color:var(--accent)}" +
+        ".sp-btn.sp-resizing{transition:none;z-index:6;filter:none}" +
+        "@media(hover:none){.sp-resize-handle{opacity:1}}" +
+        "@supports(corner-shape:superellipse(2)){.sp-continuous-corners .sp-btn{border-radius:calc(var(--btn-r)*2);corner-shape:superellipse(2)}" +
+        ".sp-continuous-corners .sp-empty-cell{border-radius:calc(var(--empty-r)*2);corner-shape:superellipse(2)}}" +
         ".sp-btn.sp-selected:hover{filter:none}" +
         ".sp-drag-active .sp-btn:hover{filter:none}" +
         ".sp-btn.sp-selected{box-shadow:inset 0 0 0 2px var(--accent)}" +
@@ -111,6 +119,7 @@ export function createWebStyles(dragAnimation: boolean): string {
         ".sp-slider-track{display:block;width:100%;height:100%;position:relative}" +
         ".sp-slider-fill{position:absolute;left:0;bottom:0;width:100%;height:80%;background:var(--card-slider-fill-color,var(--card-active-color,var(--screen-primary)));" +
         "border-radius:var(--r)}" +
+        ".sp-cover-preview .sp-slider-fill{top:0;bottom:auto}" +
         ".sp-image-card{padding:0}" +
         ".sp-image-preview{position:absolute;inset:0;display:block;overflow:hidden;border-radius:var(--btn-r);" +
         "background:var(--screen-tertiary)}" +
@@ -638,6 +647,7 @@ export function createWebStyles(dragAnimation: boolean): string {
         ".sp-btn-label-row .sp-btn-label{flex:1;min-width:0}" +
         ".sp-subpage-badge{font-size:var(--btn-label);line-height:1;color:var(--card-text-color,var(--preview-text-primary));flex-shrink:0;" +
         "cursor:pointer;padding:0 0 0 2px;border-radius:4px}" +
+        ".sp-btn:has(>.sp-resize-handle) .sp-subpage-badge{margin-right:max(0px,calc(40px - var(--btn-pad)))}" +
         ".sp-hide-subpage-chevrons .sp-subpage-badge{display:none}" +
         "@media(max-width:768px){" +
         ":root{--gap:12px}" +
@@ -653,14 +663,14 @@ export function createWebStyles(dragAnimation: boolean): string {
         ".card-header{margin:-16px -16px 0 -16px;padding:16px 16px 0 16px}" +
         ".card-body{padding-top:14px}" +
         ".sp-config{padding:var(--gap)}" +
-        "#sp-settings .sp-config{padding-bottom:6px}" +
-        "#sp-settings .sp-apply-bar{padding-top:6px;padding-bottom:max(var(--gap),env(safe-area-inset-bottom))}" +
+        "#sp-settings .sp-config,#sp-device .sp-config{padding-bottom:6px}" +
+        "#sp-settings .sp-apply-bar,#sp-device .sp-apply-bar{padding-top:6px;padding-bottom:max(var(--gap),env(safe-area-inset-bottom))}" +
         "}" +
         "@media(max-width:480px){" +
         ":root{--gap:10px}" +
         ".sp-header{padding:0 10px}" +
-        ".sp-tab{padding:0 10px;font-size:.75rem}" +
-        ".sp-tab-docs{margin-left:2px;padding-left:16px;gap:4px}" +
+        ".sp-tab{padding:0 4px;font-size:.75rem}" +
+        ".sp-tab-docs{margin-left:2px;padding-left:10px;gap:4px}" +
         ".sp-settings-status-header{margin:40px 2px 12px}" +
         ".sp-config>.sp-settings-status-header:first-child{margin-top:12px}" +
         ".card{border-radius:10px;margin-bottom:10px}" +

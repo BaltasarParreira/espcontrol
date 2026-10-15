@@ -104,6 +104,9 @@ export function createWebStyles(dragAnimation: boolean): string {
         ".sp-btn>.sp-btn-label,.sp-btn>.sp-btn-label-row{margin-top:auto}" +
         ".sp-media-group-active{box-shadow:inset 0 0 0 3px var(--accent)}" +
         ".sp-btn-label{display:block;max-height:var(--btn-label-max-height);overflow:hidden;word-break:break-word;min-height:0}" +
+        ".sp-editable-title{cursor:text;pointer-events:auto}.sp-editable-title:focus-visible{outline:2px solid currentColor;outline-offset:2px}" +
+        ".sp-card-name-input{display:block;box-sizing:border-box;width:100%;min-width:0;margin:0;padding:0;border:0;border-bottom:1px solid currentColor;border-radius:0;outline:none;background:transparent;color:inherit;font:inherit;line-height:inherit;user-select:text}" +
+        ".sp-image-label-stack:has(.sp-card-name-input){min-width:5em;max-width:100%;font-size:var(--btn-label);line-height:1.2;color:#fff}" +
         ".sp-sensor-badge{position:absolute;top:var(--sensor-top);right:var(--sensor-right);font-size:var(--sensor-fs);opacity:.5}" +
         ".sp-sensor-preview{display:flex;align-items:baseline;gap:.18em;color:var(--card-text-color,var(--preview-text-primary))}" +
         ".sp-climate-temp-card .sp-sensor-preview{position:absolute;left:var(--btn-pad);top:var(--btn-pad)}" +
@@ -114,6 +117,16 @@ export function createWebStyles(dragAnimation: boolean): string {
         ".sp-clock-left-mid{justify-content:center;align-items:flex-start}" +
         ".sp-clock-centered{justify-content:center;align-items:center}" +
         ".sp-forecast-preview{white-space:nowrap;gap:0}" +
+        ".sp-weather-daily-card{font-size:var(--btn-label)}" +
+        ".sp-weather-days{display:grid;width:100%;height:100%;min-height:0;align-items:stretch;overflow:hidden;gap:1.25em}" +
+        ".sp-weather-day{min-width:0;min-height:0;display:flex;flex-direction:column;align-items:flex-start;text-align:left;gap:.2em;font-size:var(--btn-label);white-space:nowrap}" +
+        ".sp-weather-day[hidden]{display:none}.sp-weather-day .mdi{font-size:var(--btn-icon);line-height:1;margin-bottom:auto}" +
+        ".sp-weather-grid .sp-weather-day{justify-content:center}.sp-weather-grid .sp-weather-day .mdi{margin-bottom:var(--weather-icon-gap)}" +
+        ".sp-weather-temperature-high{white-space:nowrap;font-size:var(--btn-small-text);color:var(--card-text-color,var(--preview-text-primary));opacity:.7}" +
+        ".sp-weather-list .sp-weather-day{display:grid;grid-template-columns:var(--btn-icon) minmax(0,1fr);grid-template-rows:auto auto;align-content:center;align-items:start;column-gap:var(--weather-list-gap)!important}" +
+        ".sp-weather-list .sp-weather-day>.mdi{grid-column:1;grid-row:1 / span 2;align-self:center;margin-bottom:0}" +
+        ".sp-weather-list .sp-weather-day>span:nth-child(2){grid-column:2;grid-row:1;overflow:hidden;text-overflow:ellipsis}" +
+        ".sp-weather-list .sp-weather-temperature-high{grid-column:2;grid-row:2}" +
         ".sp-sensor-value{font-size:var(--btn-icon);line-height:1;font-weight:300}" +
         ".sp-sensor-unit{font-size:var(--btn-label);line-height:1;color:var(--card-text-color,var(--preview-text-primary))}" +
         ".sp-slider-preview{position:absolute;inset:0;border-radius:var(--r);overflow:hidden;pointer-events:none}" +
@@ -584,6 +597,7 @@ export function createWebStyles(dragAnimation: boolean): string {
         ".sp-ctx-menu{position:fixed;z-index:200;background:var(--surface);border:1px solid var(--border);" +
         "border-radius:var(--radius);padding:4px 0;min-width:160px;box-shadow:var(--shadow-3);" +
         "font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}" +
+        ".sp-ctx-colours>.sp-card-color-presets{margin:4px 14px 10px}" +
         ".sp-ctx-item{display:flex;align-items:center;gap:10px;padding:8px 14px;" +
         "cursor:pointer;font-size:.8rem;color:var(--text);transition:background .15s;white-space:nowrap}" +
         ".sp-ctx-item:hover{background:var(--accent-soft)}" +
@@ -592,11 +606,13 @@ export function createWebStyles(dragAnimation: boolean): string {
         ".sp-ctx-item.sp-ctx-danger .mdi{color:var(--danger)}" +
         ".sp-ctx-divider{height:1px;background:var(--border);margin:4px 0}" +
         ".sp-ctx-sub{position:relative}" +
-        ".sp-ctx-sub::after{content:'\\F0142';font-family:'Material Design Icons';position:absolute;right:10px;font-size:14px;opacity:.5}" +
-        ".sp-ctx-submenu{display:none;position:absolute;top:-4px;left:100%;background:var(--surface);" +
+        ".sp-ctx-sub-trigger{position:relative;padding-right:34px}" +
+        ".sp-ctx-sub-trigger[aria-expanded=true],.sp-ctx-sub-trigger:focus-visible{background:var(--accent-soft)}" +
+        ".sp-ctx-sub-trigger:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}" +
+        ".sp-ctx-sub-trigger::after{content:'\\F0142';font-family:'Material Design Icons';position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:14px;opacity:.5;pointer-events:none}" +
+        ".sp-ctx-submenu{display:none;position:fixed;background:var(--surface);" +
         "border:1px solid var(--border);border-radius:var(--radius);padding:4px 0;min-width:120px;" +
         "box-shadow:var(--shadow-3);z-index:201}" +
-        ".sp-ctx-sub:hover>.sp-ctx-submenu{display:block}" +
         ".sp-ctx-check{font-size:14px;width:18px;text-align:center;color:var(--accent)}" +
         ".sp-banner{padding:12px var(--gap);font-size:.8rem;font-weight:500;text-align:center;display:none}" +
         ".sp-banner.sp-error{display:block;background:rgba(244,63,94,.16);color:#f66f81;border-bottom:1px solid rgba(244,63,94,.25)}" +

@@ -6,21 +6,26 @@ description:
 
 # Appearance
 
-The **Appearance** section is at the top of **Settings**. Its panels are
+The **Appearance** section is at the top of **Screen**. Its panels are
 **Active Colour**, **Card Style** (curve), **Theme**, [Idle](/features/idle) and [Clock Bar](/features/clock-bar).
 
 Cards use continuous corners, with the same proportions on the panel and
 setup-page preview. Choose **Card curve → Small, Medium or Large** in
-**Settings → Appearance**. The choice applies to home and subpage cards, including Back,
+**Screen → Appearance**. The choice applies to home and subpage cards, including Back,
 is saved on the display and survives restarts.
 
 All supported displays use continuous corners that ease gradually into the
-card edges. **Medium** is the default. The **Large** corner sizes are: 26 px on S3,
-20 px on the 7-inch and 4.3-inch panels, 22 px on the 10-inch panels,
-and 35 px on P4-86.
-On S3, **Small**, **Medium** and **Large** are 14 px, 20 px and 26 px.
-On the other panels, **Small** uses half the Large size and **Medium** uses
-three quarters, rounded to whole pixels.
+card edges. **Medium** is the default. Corner sizes in pixels are:
+
+| Display | Small | Medium | Large |
+| --- | ---: | ---: | ---: |
+| 7-inch and 4.3-inch P4 panels (all versions) | 8 | 20 | 32 |
+| 10-inch panels (all versions) | 13 | 18 | 22 |
+| P4-86 | 21 | 28 | 35 |
+| S3 | 16 | 21 | 26 |
+
+The 7-inch and 4.3-inch P4 panels use a wider spread so each step is clearly visible.
+On other displays, Small uses 60% of Large and Medium uses 80%, rounded to whole pixels.
 The same curve applies to the network-status Settings cards, including Back and Screen Lock. Ordinary modal controls and colour swatches keep their existing button radius.
 Images, artwork and slider fills follow the same outline. The web preview
 uses the same curve, including in browsers without native continuous-corner
@@ -36,12 +41,12 @@ backup without it keeps the current choice. Home Assistant can also change
 the **Screen: Card Curve** select. Changes update the preview immediately
 and redraw the physical cards after the display's brief refresh delay.
 
-Find these controls in **Settings → Appearance** on the [Setup](/features/setup) page. Your selection is saved on the panel and applies without a reboot. Existing panels default to Dark.
+Find these controls in **Screen → Appearance** on the [Setup](/features/setup) page. Your selection is saved on the panel and applies without a reboot. Existing panels default to Dark.
 
 ## Theme
 
 - **Dark** and **Light** select a fixed appearance.
-- Under **Automatic theme**, **Sunrise & Sunset** switches to Light at sunrise and Dark at sunset. The panel shows the calculated sunrise and sunset times when this method is selected. It uses its existing on-device calculation based on the configured timezone and approximate location. Set the correct timezone under **Device → Preferences → Time**. A Home Assistant `sun.sun` entity is not required.
+- Under **Automatic theme**, **Sunrise & Sunset** switches to Light at sunrise and Dark at sunset. The panel shows the calculated sunrise and sunset times when this method is selected. It uses its existing on-device calculation based on the configured timezone and approximate location. Set the correct timezone under **System → Preferences → Time**. A Home Assistant `sun.sun` entity is not required.
 - Under **Automatic theme**, **Manual** uses the panel's local clock. Set **Light from** and **Dark from** in 24-hour `HH:MM` format. The Light period can cross midnight. If both times are the same, Dark remains active.
 
 When clock or solar data is temporarily unavailable, Automatic keeps the last active appearance. A fresh boot falls back to Dark until the required data is known. The **Screen: Active Theme** Home Assistant sensor reports the effective Dark or Light palette even while Automatic is selected.
@@ -67,12 +72,14 @@ Striped active cards use lighter or darker stripes to keep text readable across 
 
 Custom card colours stay in place when changing a card’s controls, reopening its editor or switching themes. Media Cover Art uses the chosen card colour while artwork is loading or unavailable; visible artwork keeps white text. Media progress bars use a lighter or darker shade of the chosen card colour so progress remains visible.
 
+For a quick background change, right-click a card in the web preview, then hover over **Change Colour** (marked with a chevron) to open its pop-out palette. You can also click it to open the submenu. Pick a preset or use the eyedropper for a custom colour; the choice saves immediately. You can also change several selected cards together or recolour a subpage’s **Back** card. Image and full QR cards keep their fixed backgrounds. **Reset Colour** restores the default background while keeping any separate active-state colour.
+
 Cards using their default background highlight the matching preset or custom picker for the current theme. Resetting a card’s colours restores this default selection.
 
 In a card’s **Custom Colours** controls, **Active state colour** offers three choices:
 
 - **Matching** uses a brighter shade of a darker custom card colour, a darker shade of a pale colour, or the Appearance active colour when the card uses its default background.
-- **Global** uses the active colour selected in **Settings → Appearance**, including when the card has a custom background.
+- **Global** uses the active colour selected in **Screen → Appearance**, including when the card has a custom background.
 - **Custom** shows a second colour picker for a separate active colour. It starts with Matching’s shade selected and follows the card colour until you choose an alternative. Its presets use the same shades as Matching; the eyedropper still lets you choose any colour.
 
 These choices apply on the main screen and subpages wherever a card normally uses an active colour. Sensor, Door/Window and Presence cards still need their **Active Colour** option enabled to highlight their active state. Resetting colours also restores **Matching**.

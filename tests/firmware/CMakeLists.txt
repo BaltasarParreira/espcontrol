@@ -94,6 +94,9 @@ add_test(NAME multipart_upload_completion_test COMMAND
 add_test(NAME web_ota_guard_test COMMAND
   ${CMAKE_COMMAND} -E env "CXX=${CMAKE_CXX_COMPILER}"
   ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/web_ota_guard_test.py)
+add_test(NAME web_event_source_lifecycle_test COMMAND
+  ${CMAKE_COMMAND} -E env "CXX=${CMAKE_CXX_COMPILER}"
+  ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/web_event_source_lifecycle_test.py)
 
 add_test(NAME option_select_values_test COMMAND
   ${CMAKE_COMMAND} -E env "CXX=${CMAKE_CXX_COMPILER}"
@@ -150,8 +153,12 @@ target_compile_features(guest_wifi_state_test PRIVATE cxx_std_17)
 target_compile_options(guest_wifi_state_test PRIVATE -Wall -Wextra -Werror)
 target_include_directories(guest_wifi_state_test PRIVATE ../../components/espcontrol)
 add_test(NAME guest_wifi_state_test COMMAND guest_wifi_state_test)
+add_test(NAME local_sensor_invalid_values_test COMMAND ${Python3_EXECUTABLE}
+  ${CMAKE_CURRENT_SOURCE_DIR}/local_sensor_invalid_values_test.py ${CMAKE_CXX_COMPILER})
 add_test(NAME guest_wifi_lifecycle_test COMMAND ${Python3_EXECUTABLE}
   ${CMAKE_CURRENT_SOURCE_DIR}/guest_wifi_lifecycle_test.py ${CMAKE_CXX_COMPILER})
+add_test(NAME webhook_log_secrets_test COMMAND ${Python3_EXECUTABLE}
+  ${CMAKE_CURRENT_SOURCE_DIR}/webhook_log_secrets_test.py ${CMAKE_CXX_COMPILER})
 
 add_executable(wifi_qr_codec_test wifi_qr_codec_test.cpp)
 target_compile_features(wifi_qr_codec_test PRIVATE cxx_std_17)
@@ -662,6 +669,8 @@ add_test(NAME remote_modal_test COMMAND
 
 add_test(NAME fan_control_label_test COMMAND
   ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/fan_control_label_test.py ${CMAKE_CXX_COMPILER})
+add_test(NAME robot_card_icons_test COMMAND
+  ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/robot_card_icons_test.py ${CMAKE_CXX_COMPILER})
 
 add_test(NAME clock_image_overlay_test COMMAND
   ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/clock_image_overlay_test.py)
